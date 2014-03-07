@@ -17,14 +17,29 @@
 	article {
 		text-align: left;
 	}
+	
+	.invisible {
+		display: none;
+	}
 	</style>
+	<script src="jquery-1.10.2.js"></script>
+	<script src="underscore.js"></script>
+	<script src="backbone.js"></script>
 </head>
 <body>
 
+<div class="root view">
 <h1>Thomas Lewandowski</h1>
 
-<p>Welcome to my portfolio page. Feel free to look at my <a href="https://github.com/tslewandowski">GitHub</a> or <a href="http://www.linkedin.com/pub/thomas-lewandowski/3b/667/692">LinkedIn</a> accounts for now, or <a href="mailto:tslewandowski@gmail.com">email</a> me. Details for a few of my projects are below, and more are on the way.</p>
+<p>Welcome to my portfolio page. Feel free to look at my <a href="https://github.com/tslewandowski">GitHub</a> or <a href="http://www.linkedin.com/pub/thomas-lewandowski/3b/667/692">LinkedIn</a> accounts for now, or <a href="mailto:tslewandowski@gmail.com">email</a> me.</p>
 
+<p>I'm a web developer in New York currently looking for interesting projects to work on and problems to solve.</p>
+
+<h1><a href="#/projects">Projects</a></h1>
+</div>
+
+<div class="projects view">
+<h1><a href="#">Tom's</a> Projects</a></h1>
 <article>
 	Tomblr <em>(Rails, Backbone.js)</em> <a href="https://github.com/tslewandowski/tomblr">GitHub</a>, <a href="http://tomblr.org">Live</a>
 	<p>A clone of Tumblr with particular emphasis on photo uploading.</p>
@@ -55,6 +70,38 @@
 		<li>Automatically generates routes matched through Regular Expressions.</li>
 	</ul>
 </article>
+
+<article>
+	'Stroids <em>(JavaScript)</em> <a href="https://github.com/tslewandowski/stroids">GitHub</a>
+	<p>An asteroids game done using JavaScript and HTML5 Canvas</p>
+	<ul>
+		<li>Uses keybindings for control.</li>
+		<li>Lots of vectors, and linear algebra.</li>
+	</ul>
+</article>
+</div>
+<script>
+	var Portfolio = {};
+
+	$(document).ready(function () {
+		Portfolio.Router = Backbone.Router.extend({
+			routes: {
+				"projects": "showProjects",
+				"": "showRoot"
+			},
+			showProjects: function () {
+				$(".view").addClass("invisible");
+				$(".projects").removeClass("invisible");
+			},
+			showRoot: function () {
+				$(".view").addClass("invisible");
+				$(".root").removeClass("invisible");
+			}
+		});
+		var router = new Portfolio.Router();
+		Backbone.history.start();
+	});
+</script>
 
 </body>
 </html>
